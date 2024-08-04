@@ -9,7 +9,13 @@
 }
 
 .hint {
+	font-family: Arial, Helvetica, sans-serif;
 	margin-left: 1.2em;
+}
+
+.hint > a {
+	text-decoration: none;
+	color: chocolate;
 }
 
 #item_container {
