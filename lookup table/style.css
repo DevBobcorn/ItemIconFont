@@ -150,3 +150,40 @@
 	transform-origin: left top;
 	transform: scale(1, 1);
 }
+
+#tooltip {
+	position: fixed;
+	top: 0;
+	left: 0;
+	background-color: #9cd982;
+	padding: 0.375em;
+	font-family: "Courier New", Courier, monospace;
+	font-weight: bold;
+	font-size: 16px;
+	white-space: nowrap;
+	line-height: 1.25em;
+	margin: 0.125em 0.25em;
+	pointer-events: none;
+	z-index: 9999;
+	color: #fbfbfb;
+  	text-shadow: 0.125em 0.125em 0 #89ae89;
+}
+#tooltip::before {
+  content: "";
+  position: absolute;
+  top: 0.125em;
+  right: -0.125em;
+  bottom: 0.125em;
+  left: -0.125em;
+  border: 0.15em solid #9cd982;
+  border-style: none solid;
+}
+#tooltip::after {
+  content: "";
+  position: absolute;
+  top: 0.125em;
+  right: 0;
+  bottom: 0.125em;
+  left: 0;
+  border: 0.125em solid #ffd452;
+}

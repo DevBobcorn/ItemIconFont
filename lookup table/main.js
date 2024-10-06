@@ -1,3 +1,21 @@
+function tooltipFollow(e, el) {
+	x = e.clientX;
+	y = e.clientY;
+	var tooltip = document.getElementById("tooltip");
+	tooltip.innerHTML = el.dataset.tooltip;
+	tooltip.style = `top: ${y}px; left: ${x}px;`;
+}
+
+function tooltipHide() {
+	document.getElementById("tooltip").style = "display: none";
+}
+
+function copyText(text) {
+	navigator.clipboard.writeText(text);
+	var tooltip = document.getElementById("tooltip");
+	tooltip.innerHTML = "Copied!";
+}
+
 function refreshGlyphList(dictText) {
     var container = document.querySelector("#item_container");
     var dict = JSON.parse(dictText);
@@ -11,14 +29,14 @@ function refreshGlyphList(dictText) {
 
         newCell.innerHTML = `
                         <div class="cell-glyph-frame">
-                            <span class="cell-glyph underline" title="Click to copy" onclick="navigator.clipboard.writeText('\\u${info.code}')" border="0" style="background-position: -${info.x}px -${info.y}px;">
+                            <span class="cell-glyph underline" data-tooltip="Click to copy character" onmousemove="tooltipFollow(event, this)" onmouseout="tooltipHide()" onclick="copyText('\\u${info.code}')" border="0" style="background-position: -${info.x}px -${info.y}px;">
                         </div>
-                        <p class="cell-code underline" title="Click to copy" onclick="navigator.clipboard.writeText('\\\\u${info.code}')"><strong>U+${info.code.toUpperCase()}</strong><br>\\u${info.code}</p>
-                        <p class="cell-desc" title="${info.desc}">${info.desc}</p>`;
+                        <p class="cell-code underline" data-tooltip="Click to copy escape string" onmousemove="tooltipFollow(event, this)" onmouseout="tooltipHide()" onclick="copyText('\\\\u${info.code}')"><strong>U+${info.code.toUpperCase()}</strong><br>\\u${info.code}</p>
+                        <p class="cell-desc" data-tooltip="${info.desc}" onmousemove="tooltipFollow(event, this)" onmouseout="tooltipHide()">${info.desc}</p>`;
         
         if (add_ver !== undefined) {
             newCell.innerHTML +=
-                `<p class="cell-version" title="Added in ${add_ver}">${add_ver.toUpperCase()}</p>`;
+                `<p class="cell-version" data-tooltip="Added in ${add_ver}" onmousemove="tooltipFollow(event, this)" onmouseout="tooltipHide()">${add_ver.toUpperCase()}</p>`;
         }
 
         container.appendChild(newCell);
